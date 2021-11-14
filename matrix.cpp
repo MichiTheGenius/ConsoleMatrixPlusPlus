@@ -25,12 +25,17 @@ void sleep(int milliseconds)
 	this_thread::sleep_for(chrono::milliseconds(milliseconds));
 }
 
-void matrix(int numberOfCharacters)
+void matrix()
 {
 
 	cout << "Enter the delay in milliseconds: ";
 	int delay;
 	cin >> delay;
+
+	cout << "Enter the number of characters you want: ";
+	int numberOfCharacters;
+	cin >> numberOfCharacters;
+
 	system("clear"); // clear console
 	while(1)
 	{
@@ -47,7 +52,7 @@ void matrix(int numberOfCharacters)
 
 int main()
 {
-	matrix(93);
+	matrix();
 	cout << color.reset; // reset color after exiting program
 	return 0;
 }
