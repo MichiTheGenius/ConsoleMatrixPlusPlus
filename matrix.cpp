@@ -1,58 +1,96 @@
 #include <iostream>
 #include <string>
-#include <chrono>
-#include <thread>
 #include <random>
+#include <thread>
+#include <chrono>
 using namespace std;
 
-class Color{
-	public:
-		string black = "\u001b[30m";
-		string red = "\u001b[31m";
-		string green = "\u001b[32m";
-		string yellow = "\u001b[33m";
-		string blue = "\u001b[34m";
-		string magenta = "\u001b[35m";
-		string cyan = "\u001b[36m";
-		string white = "\u001b[37m";
-		string reset = "\u001b[0m";
-};
+int delay;
+int amountOfChars;
 
-Color color; // make a new color object in order to use it
+const string BLACK = "\u001b[30m";
+const string RED = "\u001b[31m";
+const string GREEN = "\u001b[32m";
+const string YELLOW = "\u001b[33m";
+const string BLUE = "\u001b[34m";
+const string MAGENTA = "\u001b[35m";
+const string CYAN = "\u001b[36m";
+const string WHITE = "\u001b[37m";
 
-void sleep(int milliseconds)
+string inputColor;
+string outputColor;
+
+void chooseColor()
 {
-	this_thread::sleep_for(chrono::milliseconds(milliseconds));
-}
+	cout << "Enter the color (black, red, green, yellow, blue, magenta, cyan, white) : ";
+	cin >> inputColor;
 
-void matrix()
-{
-
-	cout << "Enter the delay in milliseconds: ";
-	int delay;
-	cin >> delay;
-
-	cout << "Enter the number of characters you want: ";
-	int numberOfCharacters;
-	cin >> numberOfCharacters;
-
-	system("clear"); // clear console
-	while(1)
+	if(inputColor == "black")
 	{
-		for(int i = 0; i < numberOfCharacters; i++)
-		{
-			int randomNumber = rand() % 2;
-			cout << color.green << randomNumber << " ";
-		}
-		cout << "\n";
-		sleep(delay);
+		outputColor = BLACK;
+	}
+	else if(inputColor == "red")
+	{
+		outputColor = RED;
+	}
+	else if(inputColor == "green")
+	{
+		outputColor = GREEN;
+	}
+	else if(inputColor == "yellow")
+	{
+		outputColor = YELLOW;
+	}
+	else if(inputColor == "blue")
+	{
+		outputColor = BLUE;
+	}
+	else if(inputColor == "magenta")
+	{
+		outputColor = MAGENTA;
+	}
+	else if(inputColor == "cyan")
+	{
+		outputColor = CYAN;
+	}
+	else if(inputColor == "white")
+	{
+		outputColor = WHITE;
+	}
+	else
+	{
+		chooseColor();
 	}
 
+
+
+}
+
+void sleep(int ms)
+{
+	this_thread::sleep_for(chrono::milliseconds(ms));
 }
 
 int main()
 {
-	matrix();
-	cout << color.reset; // reset color after exiting program
+	cout << "Enter the delay (milliseconds) : ";
+	cin >> delay;
+
+	cout << "Enter the amount of characters to fill the screen: ";
+	cin >> amountOfChars;
+	
+	chooseColor();
+
+	while(1)
+	{
+		for(int i = 0; i<amountOfChars; i++)
+		{
+			int randomNumber = rand() % 2;
+			cout << outputColor << randomNumber << " ";
+		}
+		cout << "\n";
+		sleep(delay);
+	}
 	return 0;
 }
+
