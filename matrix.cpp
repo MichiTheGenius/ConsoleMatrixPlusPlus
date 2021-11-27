@@ -20,10 +20,25 @@ const string WHITE = "\u001b[37m";
 string inputColor;
 string outputColor;
 
+string lower(string input)
+{
+	char charArray[input.length()]; // make a new character array with the length of the input string
+	string output = ""; // declare and initialise an empty output string
+	int lengthOfArray = sizeof(charArray) / sizeof(charArray[0]); // get the length of the array -> size of array in bytes divided with sizeof of one element in bytes
+	for (int i = 0; i<lengthOfArray; i++) // loop through the array
+	{
+		charArray[i] = input[i]; // char array gets the characters of the input string
+		char lowerChar = char(tolower(charArray[i])); // make a lowercase character with a c++ given funtion (not casting to a char does not work)
+		output += lowerChar; // output is being "built" with the lowercase characters
+	}
+	return output;
+}
+
 void chooseColor()
 {
 	cout << "Enter the color (black, red, green, yellow, blue, magenta, cyan, white) : ";
 	cin >> inputColor;
+	inputColor = lower(inputColor);           
 
 	if(inputColor == "black")
 	{
@@ -61,9 +76,6 @@ void chooseColor()
 	{
 		chooseColor();
 	}
-
-
-
 }
 
 void sleep(int ms)
@@ -81,16 +93,15 @@ int main()
 	
 	chooseColor();
 
-	while(1)
+	while(1) // infinite loop
 	{
 		for(int i = 0; i<amountOfChars; i++)
 		{
-			int randomNumber = rand() % 2;
-			cout << outputColor << randomNumber << " ";
+			int randomNumber = rand() % 2; // get a random number between 0 and 1
+			cout << outputColor << randomNumber << " "; // output the random number with the chosen color
 		}
 		cout << "\n";
 		sleep(delay);
 	}
 	return 0;
 }
-
