@@ -22,13 +22,10 @@ string outputColor;
 
 string lower(string input)
 {
-	char charArray[input.length()]; // make a new character array with the length of the input string
 	string output = ""; // declare and initialise an empty output string
-	int lengthOfArray = sizeof(charArray) / sizeof(charArray[0]); // get the length of the array -> size of array in bytes divided with sizeof of one element in bytes
-	for (int i = 0; i<lengthOfArray; i++) // loop through the array
+	for (int i = 0; i<input.length(); i++) // loop through the array
 	{
-		charArray[i] = input[i]; // char array gets the characters of the input string
-		char lowerChar = char(tolower(charArray[i])); // make a lowercase character with a c++ given funtion (not casting to a char does not work)
+		char lowerChar = char(tolower(input[i])); // make a lowercase character with a c++ given funtion (not casting to a char does not work)
 		output += lowerChar; // output is being "built" with the lowercase characters
 	}
 	return output;
